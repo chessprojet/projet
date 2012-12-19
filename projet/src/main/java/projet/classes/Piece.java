@@ -6,10 +6,10 @@ import java.util.ArrayList;
 
 public abstract class Piece {
 
-	private int CasePlace;				// Numéro de la case associé à la Pièce
+	protected int CasePlace;				// Numéro de la case associé à la Pièce
 	private boolean etat;				// Etat de la Pièce : En jeu (true) ou Détruite (false)
-	private ArrayList<Integer> nbsoldir;
-	private ArrayList<Integer> deplacement;
+	protected ArrayList<Integer> nbsoldir;
+	protected ArrayList<Integer> deplacement;
 	
 	public ArrayList<Integer> getNbsoldir() {
 		return nbsoldir;
