@@ -11,7 +11,7 @@ public class Partie {
     private Joueur j2;
     private Echiquier echiquierPartie;
 
-    
+    	
     
     // Constructeur
     public Partie(Joueur j1, Joueur j2, Echiquier echiquierPartie) {
@@ -72,10 +72,9 @@ public class Partie {
 	public void deplacerPiece(Piece p,Joueur blanc) {
 		Case c=new Case(p.isCase());
 		c.setP(p);
-    	ArrayList<Integer> deplacement = new ArrayList<Integer>();
-    	ArrayList<Integer> deplacementPossible = new ArrayList<Integer>();
-    	int deplacementChoisi=0;
-    	ArrayList<Integer> nbsoldir=new ArrayList<Integer>();	// Liste des nombres de solutions possibles dans une direction
+    	
+    	
+    	
     	
     	// Déplacements possibles pour le pion
     	if (c.getP().getClass().getName()=="projet.classes.Pion") {
@@ -470,10 +469,15 @@ public class Partie {
     			mdroite=false; ddroite=false;
     		}  
     	}
-    	
-    	
+	}
+    public int deplacementPossible(Piece p,Joueur blanc){	
     	// On regarde tous les déplacements possibles (concerne toutes les pièces)
+    	ArrayList<Integer> deplacementPossible = new ArrayList<Integer>();
+    	int deplacementChoisi=0;
+    	ArrayList<Integer> nbsoldir=p.getNbsoldir();
+    	ArrayList<Integer> deplacement=p.getDeplacement();
     	int somme=0;
+    	Case c=echiquierPartie.getPlateau()[p.isCase()];
     	for (int i=0;i<nbsoldir.size();i++)
     	{
     		boolean nopresent=true;
@@ -512,8 +516,6 @@ public class Partie {
     		}
     		somme=somme+nbsoldir.get(i);
     	}
-
-    	
     	// On affiche les différents déplacements possibles
     	for (int pos1=0;pos1<deplacementPossible.size();pos1++){
     		System.out.println("Choix "+pos1+" : ");
@@ -521,7 +523,11 @@ public class Partie {
     	}
     	
     	Scanner sc=new Scanner(System.in);
-		deplacementChoisi=sc.nextInt()-c.getNumCase();
+		return deplacementChoisi=sc.nextInt()-c.getNumCase();
+    }
+    
+    public void DeplacementChoisi(int deplacementChoisi,Piece p){	
+    	Case c=echiquierPartie.getPlateau()[p.isCase()];
 		
 		if (echiquierPartie.getPlateau()[c.getNumCase()+deplacementChoisi].isEtatCase()==false) {
 			echiquierPartie.getPlateau()[c.getNumCase()+deplacementChoisi].setEtatCase(true);
