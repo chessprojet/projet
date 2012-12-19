@@ -1,13 +1,24 @@
 package projet.classes;
 
+import java.util.ArrayList;
+
 // Classe Piece
 
 public abstract class Piece {
 
 	private int CasePlace;				// Numéro de la case associé à la Pièce
 	private boolean etat;				// Etat de la Pièce : En jeu (true) ou Détruite (false)
-
+	private ArrayList<Integer> nbsoldir;
+	private ArrayList<Integer> deplacement;
 	
+	public ArrayList<Integer> getNbsoldir() {
+		return nbsoldir;
+	}
+
+	public ArrayList<Integer> getDeplacement() {
+		return deplacement;
+	}
+
 	// Constructeur de la Pièce sans arguments
 	public Piece () {
 	    this.etat=true;
