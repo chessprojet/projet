@@ -69,7 +69,6 @@ public class Partie {
     }*/
 	
     // Méthode pour déplacer une pièce
-
     public int deplacementPossible(Piece p,Joueur blanc){	
     	// On regarde tous les déplacements possibles (concerne toutes les pièces)
     	ArrayList<Integer> deplacementPossible = new ArrayList<Integer>();
@@ -154,12 +153,12 @@ public class Partie {
     			
     }
 
- // Méthode pour connaître si le roi est en échec
+    // Méthode pour connaître si le roi est en échec
  	public boolean estEnEchec(Joueur noir, int direction) {
  		boolean estpasechec=false;
  		int pos=1;
  		
- 		// On regarde sur la hauteur montante
+ 		// On regarde sur la hauteur descendante
  		while(pos*8+noir.getPiece()[3].isCase()+direction<=63 && estpasechec==false) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+pos*8].isEtatCase()==true) {
  				for (int k=0;k<16;k++) {
@@ -176,9 +175,10 @@ public class Partie {
  				pos++;
  		}
  		
+ 		pos=1;
  		estpasechec=false;
  		
- 		// On regarde sur la hauteur descendante
+ 		// On regarde sur la hauteur montante
  		while(-pos*8+noir.getPiece()[3].isCase()+direction>=0 && estpasechec==false) {
  				if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].isEtatCase()==true) {
  					for (int k=0;k<16;k++) {
@@ -194,11 +194,12 @@ public class Partie {
  				}
  				pos++;
  			}
-
+ 		
+ 		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur le côté droit
- 		while(pos+noir.getPiece()[3].isCase()+direction%8!=0 && estpasechec==false) {
+ 		while((pos+noir.getPiece()[3].isCase()+direction)%8!=0 && estpasechec==false) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++){
  					// Si on a une pièce allié à droite, pas d'échec
@@ -213,10 +214,11 @@ public class Partie {
  			}
  		}
  		
+ 		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur le côté gauche
- 		while(pos+noir.getPiece()[3].isCase()+direction%8!=7 && estpasechec==false) {
+ 		while((pos+noir.getPiece()[3].isCase()+direction)%8!=7 && estpasechec==false) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++){
  					// Si on a une pièce allié à gauche, pas d'échec
@@ -231,10 +233,11 @@ public class Partie {
  			}
  		}
  		
+ 		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur la diagonale descendante droite
- 		while((9*pos+noir.getPiece()[3].isCase()+direction<=63 && 9*pos+noir.getPiece()[3].isCase()+direction%8!=0) && estpasechec==false) {
+ 		while((9*pos+noir.getPiece()[3].isCase()+direction<=63 && (9*pos+noir.getPiece()[3].isCase()+direction)%8!=0) && estpasechec==false) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9*pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++) {
  					// Si on a une pièce allié dans la diagonale, pas d'échec
@@ -250,10 +253,11 @@ public class Partie {
  			pos++;
  		}
  		
+ 		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur la diagonale descendante gauche
- 		while((7*pos+noir.getPiece()[3].isCase()+direction<=63 && 7*pos+noir.getPiece()[3].isCase()+direction%8!=7) && estpasechec==false) {
+ 		while((7*pos+noir.getPiece()[3].isCase()+direction<=63 && (7*pos+noir.getPiece()[3].isCase()+direction)%8!=7) && estpasechec==false) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7*pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++) {
  					// Si on a une pièce allié dans la diagonale, pas d'échec
@@ -269,10 +273,11 @@ public class Partie {
  			pos++;
  		}
  		
+ 		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur la diagonale montante gauche
- 		while((-7*pos+noir.getPiece()[3].isCase()+direction>=0 && -7*pos+noir.getPiece()[3].isCase()+direction%8!=0) && estpasechec==false) {
+ 		while((-7*pos+noir.getPiece()[3].isCase()+direction>=0 && (-7*pos+noir.getPiece()[3].isCase()+direction)%8!=0) && estpasechec==false) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7*pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++) {
  					// Si on a une pièce allié dans la diagonale, pas d'échec
@@ -288,10 +293,11 @@ public class Partie {
  			pos++;
  		}
  		
+ 		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur la diagonale montante droite
- 		while((-9*pos+noir.getPiece()[3].isCase()+direction>=0 && -9*pos+noir.getPiece()[3].isCase()+direction%8!=7) && estpasechec==false) {
+ 		while((-9*pos+noir.getPiece()[3].isCase()+direction>=0 && (-9*pos+noir.getPiece()[3].isCase()+direction)%8!=7) && estpasechec==false) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9*pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++) {
  					// Si on a une pièce allié dans la diagonale, pas d'échec
@@ -307,6 +313,7 @@ public class Partie {
  			pos++;
  		}
  		
+ 		pos=1;
  		estpasechec=false;
  		
  		// On regarde le cas des pions
@@ -370,6 +377,7 @@ public class Partie {
  			}
  		}
  		
+ 		pos=1;
  		estpasechec=false;
  		
  		// On regarde le cas des cavaliers
@@ -415,6 +423,15 @@ public class Partie {
  			}
  		}
  		return false;
+ 	}
+ 	
+ 	public boolean estEchecMat(Joueur noir) {
+ 		if (estEnEchec(noir, 0) && estEnEchec(noir, -9) && estEnEchec(noir, -8) && estEnEchec(noir, -7) && estEnEchec(noir, -1) && estEnEchec(noir, 1) && estEnEchec(noir, 7) && estEnEchec(noir, 8) && estEnEchec(noir, 9)) {
+ 			return true;
+ 		}
+ 		else {
+ 			return false;
+ 		}
  	}
 }
   
