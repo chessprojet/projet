@@ -219,9 +219,9 @@ public class Partie {
  		estpasechec=false;
  		
  		// On regarde sur le côté gauche
- 		while((pos+noir.getPiece()[3].isCase()+direction)%8!=7 && estpasechec==false) {
+ 		while((-pos+noir.getPiece()[3].isCase()+direction)%8!=7 && estpasechec==false && -pos+noir.getPiece()[3].isCase()+direction!=-1) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos].isEtatCase()==true) {
- 				for (int k=0;k<16;k++){
+ 				for (int k=0;k<16;k++) {
  					// Si on a une pièce allié à gauche, pas d'échec
  					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos].getNumCase()==noir.getPiece()[k].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos].getP().getClass().getName()!="projet.classes.Roi") {
  						estpasechec=true;
