@@ -92,7 +92,7 @@ public class Partie {
     				if (echiquierPartie.getPlateau()[c.getNumCase()+deplacement.get(pos+somme)].isEtatCase()==true) {
     					for (int pos2=0;pos2<16;pos2++) {
     						// Si le déplacement est sur une pièce nous appartient
-    						if(echiquierPartie.getPlateau()[c.getNumCase()+deplacement.get(pos+somme)].getNumCase()==echiquierPartie.getPlateau()[blanc.getPiece()[pos2].isCase()].getNumCase()) {
+    						if (echiquierPartie.getPlateau()[c.getNumCase()+deplacement.get(pos+somme)].getNumCase()==echiquierPartie.getPlateau()[blanc.getPiece()[pos2].isCase()].getNumCase()) {
     							nopresent=false;
     						}
     					}
