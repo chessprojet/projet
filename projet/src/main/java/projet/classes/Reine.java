@@ -99,7 +99,7 @@ public class Reine extends Piece {
 		// Teste tous les déplacements possibles dans la diagonale descendante droite pour ne pas sortir de l'échiquier
 		for (int pos=1; pos<8; pos++) {
 			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
-			if (w+9*pos%8==0 && mdroite==true) {
+			if (w+9*pos%8==7 && mdroite==true) {
 				mdroite=false; this.deplacement.add(9*pos); this.nbsoldir.set(4,this.nbsoldir.get(4)+1);
 			}
 			if (mdroite==true) {
@@ -110,7 +110,7 @@ public class Reine extends Piece {
 		// Teste tous les déplacements possibles dans la diagonale descendante gauche pour ne pas sortir de l'échiquier
 		for (int pos=1; pos<8; pos++) {
 			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
-			if (w+7*pos%8==7 && mgauche==true) {
+			if (w+7*pos%8==0 && mgauche==true) {
 				mgauche=false;this.deplacement.add(7*pos);this.nbsoldir.set(5,this.nbsoldir.get(5)+1);
 			}
 			if (mgauche==true) {
