@@ -41,7 +41,7 @@ public class Fou extends Piece {
 		// Teste tous les déplacements possibles dans la diagonale descendante droite pour ne pas sortir de l'échiquier
 		for (int pos=1; pos<8; pos++) {
 			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
-			if (w+9*pos%8==0 && mdroite==false) {
+			if (w+9*pos%8==0 && mdroite==true) {
 				mdroite=false; this.deplacement.add(9*pos); this.nbsoldir.set(0,this.nbsoldir.get(0)+1);
 			}
 			if (mdroite==true) {
@@ -52,7 +52,7 @@ public class Fou extends Piece {
 		// Teste tous les déplacements possibles dans la diagonale descendante gauche pour ne pas sortir de l'échiquier
 		for (int pos=1; pos<8; pos++) {
 			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
-			if (w+7*pos%8==7 && mgauche==false) {
+			if (w+7*pos%8==7 && mgauche==true) {
 				mgauche=false;this.deplacement.add(7*pos);this.nbsoldir.set(1,this.nbsoldir.get(1)+1);
 			}
 			if (mgauche==true) {
