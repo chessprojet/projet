@@ -57,7 +57,7 @@ public class Manche {
     	pos=j.choixPieceADeplacer();
     	this.j.getPiece()[pos].deplacer(this.part,this.j);
     	DC=this.part.deplacementPossible(this.j.getPiece()[pos],this.j);}
-    	while(DC==0 && j.getPiece()[pos].isEtat()==true);
+    	while(DC==0 || j.getPiece()[pos].isEtat()!=true);
     	this.part.deplacementChoisi(DC,this.j.getPiece()[pos]);
     	this.j.getPiece()[pos].setCase(DC);
     	this.part.getEchiquierPartie().toString();
