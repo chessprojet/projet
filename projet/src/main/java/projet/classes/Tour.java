@@ -40,7 +40,7 @@ public class Tour extends Piece {
     		for (int pos=1;pos<=8;pos++) {
     			
     			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
-    			if (w+pos%8==7 && droite==true) {
+    			if ((w+pos)%8==7 && droite==true) {
     				droite=false;
     				this.deplacement.add(pos);
     				this.nbsoldir.set(0,this.nbsoldir.get(0)+1);
@@ -54,7 +54,7 @@ public class Tour extends Piece {
     		// Teste tous les déplacements possibles vers la gauche pour ne pas sortir de l'échiquier
     		for (int pos=1;pos<=8;pos++) {
     			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
-    			if (w-pos%8==0 && gauche==true) {
+    			if ((w-pos)%8==0 && gauche==true) {
     				gauche=false;
     				this.deplacement.add(-pos);
     				this.nbsoldir.set(1,this.nbsoldir.get(1)+1);
