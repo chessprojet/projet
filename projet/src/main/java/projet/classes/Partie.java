@@ -434,7 +434,7 @@ public class Partie {
  				return true;
  			}
  		}
- 		if(noir.getPiece()[3].isCase()+direction>=0) {
+ 		if(noir.getPiece()[3].isCase()+direction-17>=0) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].isEtatCase()==true && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().isCase()!=noir.getPiece()[6].isCase())) {
  				return true;
  			}
