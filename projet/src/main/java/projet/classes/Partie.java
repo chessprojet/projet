@@ -172,7 +172,7 @@ public class Partie {
  					return true;
  				}
  			}
- 				pos++;
+ 			pos++;
  		}
  		
  		pos=1;
@@ -180,21 +180,21 @@ public class Partie {
  		
  		// On regarde sur la hauteur montante
  		while(-pos*8+noir.getPiece()[3].isCase()+direction>=0 && estpasechec==false) {
- 				if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].isEtatCase()==true) {
- 					for (int k=0;k<16;k++) {
- 						// Si on a une pièce allié en face, pas d'échec
- 						if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].getNumCase()==noir.getPiece()[k].isCase()) {
- 							estpasechec=true;
- 						}
- 					}
- 					// Si on a une reine ou une tour adverse en face, échec
- 					if (estpasechec==false && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].getP().getClass().getName()=="projet.classes.Tour" )) {
- 						return true;
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].isEtatCase()==true) {
+ 				for (int k=0;k<16;k++) {
+ 					// Si on a une pièce allié en face, pas d'échec
+ 					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].getNumCase()==noir.getPiece()[k].isCase()) {
+ 						estpasechec=true;
  					}
  				}
- 				pos++;
+ 				// Si on a une reine ou une tour adverse en face, échec
+ 				if (estpasechec==false && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].getP().getClass().getName()=="projet.classes.Tour" )) {
+ 					return true;
+ 				}
  			}
- 		
+ 			pos++;
+ 		}
+
  		pos=1;
  		estpasechec=false;
  		
@@ -212,6 +212,7 @@ public class Partie {
  					return true;
  				}
  			}
+ 			pos++;
  		}
  		
  		pos=1;
@@ -231,6 +232,7 @@ public class Partie {
  					return true;
  				}
  			}
+ 			pos++;
  		}
  		
  		pos=1;
