@@ -13,8 +13,10 @@ public class Tour extends Piece {
 	public String toString() {
 		return "T";
 	}
-	
-	public void Deplacer(){
+	@Override
+	public void deplacer(Partie pa,Joueur blanc){
+		this.deplacement.clear();
+		this.nbsoldir.clear();
     		int w=CasePlace;
     		/*
     		 * gauche = possibilité de se déplacer à gauche
@@ -22,7 +24,7 @@ public class Tour extends Piece {
     		 * 
     		 * */
     		boolean droite = true, gauche = true;
-    		nbsoldir.add(0); nbsoldir.add(0); nbsoldir.add(0); nbsoldir.add(0);
+    		this.nbsoldir.add(0); this.nbsoldir.add(0); this.nbsoldir.add(0); this.nbsoldir.add(0);
     		
     		// Si la pièce est à gauche de l'échiquier
     		if (w%8==0) {
@@ -40,12 +42,12 @@ public class Tour extends Piece {
     			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
     			if (w+pos%8==7) {
     				droite=false;
-    				deplacement.add(pos);
-    				nbsoldir.set(0,nbsoldir.get(0)+1);
+    				this.deplacement.add(pos);
+    				this.nbsoldir.set(0,this.nbsoldir.get(0)+1);
     			}
     			if (droite==true) {
-    				deplacement.add(pos);
-    				nbsoldir.set(0,nbsoldir.get(0)+1);
+    				this.deplacement.add(pos);
+    				this.nbsoldir.set(0,this.nbsoldir.get(0)+1);
     			}
     		}
     		
@@ -54,23 +56,23 @@ public class Tour extends Piece {
     			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
     			if (w-pos%8==0) {
     				gauche=false;
-    				deplacement.add(-pos);
-    				nbsoldir.set(1,nbsoldir.get(1)+1);
+    				this.deplacement.add(-pos);
+    				this.nbsoldir.set(1,this.nbsoldir.get(1)+1);
     			}
     			if (gauche==true) {
-    				deplacement.add(-pos);
-    				nbsoldir.set(1,nbsoldir.get(1)+1);
+    				this.deplacement.add(-pos);
+    				this.nbsoldir.set(1,this.nbsoldir.get(1)+1);
     			}
     		}
     		// Ajoute les déplacements vers le haut et le bas
     		// L'interdiction de sortir de l'échiquier est géré plus bas ( pos<0 et pos>64)
     		for (int pos=1; pos<=8; pos++) {
-    			deplacement.add(-8*pos);
-    			nbsoldir.set(2,nbsoldir.get(2)+1);
+    			this.deplacement.add(-8*pos);
+    			this.nbsoldir.set(2,this.nbsoldir.get(2)+1);
     		}
     		for (int pos=1; pos<=8; pos++) {
-    			deplacement.add(8*pos);
-    			nbsoldir.set(3,nbsoldir.get(3)+1);
+    			this.deplacement.add(8*pos);
+    			this.nbsoldir.set(3,this.nbsoldir.get(3)+1);
     		}
     	}
 	}

@@ -7,9 +7,9 @@ import java.util.ArrayList;
 public abstract class Piece {
 
 	protected int CasePlace;				// Numéro de la case associé à la Pièce
-	private boolean etat;				// Etat de la Pièce : En jeu (true) ou Détruite (false)
-	protected ArrayList<Integer> nbsoldir;
-	protected ArrayList<Integer> deplacement;
+	private boolean etat;					// Etat de la Pièce : En jeu (true) ou Détruite (false)
+	protected ArrayList<Integer> nbsoldir=new ArrayList<Integer>();
+	protected ArrayList<Integer> deplacement=new ArrayList<Integer>();
 	
 	public ArrayList<Integer> getNbsoldir() {
 		return nbsoldir;
@@ -27,6 +27,7 @@ public abstract class Piece {
 	// Constructeur de la Pièce avec arguments
 	public Piece(int c) {
 		this.etat=true;
+		this.CasePlace=c;
 	}
 	
 	// Getter de l'état de la Pièce
@@ -54,6 +55,10 @@ public abstract class Piece {
 	// Méthode pour l'affichage d'une Pièce sur la case
 	public String toString() {
 		return "X";
+	}
+
+	public void deplacer(Partie pa,Joueur blanc) {
+		
 	}
 	
 }

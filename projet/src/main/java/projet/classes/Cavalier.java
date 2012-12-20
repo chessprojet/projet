@@ -13,18 +13,20 @@ public class Cavalier extends Piece {
     public String toString() {
     	return "C";
    	}
-    
-    public void Deplacer(){
-    	deplacement.add(17);
-		deplacement.add(15);
-		deplacement.add(-17);
-		deplacement.add(-15);
-		deplacement.add(10);
-		deplacement.add(6);
-		deplacement.add(-10);
-		deplacement.add(-6);
+    @Override
+    public void deplacer(Partie pa,Joueur blanc){
+    	this.deplacement.clear();
+		this.nbsoldir.clear();
+    	this.deplacement.add(17);
+		this.deplacement.add(15);
+		this.deplacement.add(-17);
+		this.deplacement.add(-15);
+		this.deplacement.add(10);
+		this.deplacement.add(6);
+		this.deplacement.add(-10);
+		this.deplacement.add(-6);
 		for (int i=0; i<deplacement.size();i++) {
-			nbsoldir.add(1);
+			this.nbsoldir.add(1);
 		}  
     }
 }

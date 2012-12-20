@@ -13,8 +13,10 @@ public class Roi extends Piece {
 	public String toString() {
 		return "R";
 	}
-	
-	public void Deplacer(){
+	@Override
+	public void deplacer(Partie pa,Joueur blanc){
+		this.deplacement.clear();
+		this.nbsoldir.clear();
 		int w=CasePlace;
 		/*
 		 * gauche = possibilité de se déplacer à gauche
@@ -29,7 +31,7 @@ public class Roi extends Piece {
 		
 		// Ajout de 8 valeurs par défaut dans la liste du nombre des directions possibles
 		for (int i=0; i<8; i++) {
-			nbsoldir.add(0);
+			this.nbsoldir.add(0);
 		}
 		
 		// Si la pièce est à gauche de l'échiquier
@@ -47,48 +49,48 @@ public class Roi extends Piece {
 		}
 		
 		if (droite==true) {
-			deplacement.add(1);
-			nbsoldir.set(0,nbsoldir.get(0)+1);
+			this.deplacement.add(1);
+			this.nbsoldir.set(0,this.nbsoldir.get(0)+1);
 		}
 		
 		if (gauche==true) {
-			deplacement.add(-1);
-			nbsoldir.set(1,nbsoldir.get(1)+1);
+			this.deplacement.add(-1);
+			this.nbsoldir.set(1,this.nbsoldir.get(1)+1);
 		}
 		
 		// Ajoute les déplacements vers le haut et le bas
 		// L'interdiction de sortir de l'échiquier est géré plus bas (pos<0 et pos>64)
 		
-		deplacement.add(-8);
-		nbsoldir.set(2,nbsoldir.get(2)+1);
+		this.deplacement.add(-8);
+		this.nbsoldir.set(2,this.nbsoldir.get(2)+1);
 
-		deplacement.add(8);
-		nbsoldir.set(3,nbsoldir.get(3)+1);
+		this.deplacement.add(8);
+		this.nbsoldir.set(3,this.nbsoldir.get(3)+1);
 		
 		// Ajoute les déplacements vers les différentes diagonales
 		
 		// Diagonale descendante droite
 		if (mdroite==true) {
-			deplacement.add(9);
-			nbsoldir.set(4,nbsoldir.get(4)+1);
+			this.deplacement.add(9);
+			this.nbsoldir.set(4,this.nbsoldir.get(4)+1);
 		}
 		
 		// Diagonale descendante gauche
 		if (mgauche==true) {
-			deplacement.add(7);
-			nbsoldir.set(5,nbsoldir.get(5)+1);
+			this.deplacement.add(7);
+			this.nbsoldir.set(5,this.nbsoldir.get(5)+1);
 		}
 		
 		// Diagonale montante droite
 		if (ddroite==true) {
-			deplacement.add(-9);
-			nbsoldir.set(6,nbsoldir.get(6)+1);
+			this.deplacement.add(-9);
+			this.nbsoldir.set(6,this.nbsoldir.get(6)+1);
 		}
 		
 		// Diagonale montante gauche
 		if (dgauche==true) {
-			deplacement.add(-7);
-			nbsoldir.set(7,nbsoldir.get(7)+1);
+			this.deplacement.add(-7);
+			this.nbsoldir.set(7,this.nbsoldir.get(7)+1);
 		}
 		
 		// Si la pièce est à gauche de l'échiquier

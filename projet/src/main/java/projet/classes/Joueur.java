@@ -8,7 +8,7 @@ public class Joueur {
 	
     private String nom;						// Nom du Joueur
     private boolean aide;					// Aide : activée (true) ou désactivée (false)
-    public Piece piece[]= new Piece[16];	// Création d'un tableau comportant 16 Pièces
+    private Piece piece[]= new Piece[16];	// Création d'un tableau comportant 16 Pièces
     
     
     // Constructeur du Joueur
@@ -74,13 +74,13 @@ public class Joueur {
 			this.aide=false;
     }
 
-    public Piece choixPieceADeplacer(){
+    public int choixPieceADeplacer(){
     	System.out.println("piece a deplacer?");
     	for (int pos=0;pos<16;pos++)
-    		System.out.println(piece[pos]);
+    		System.out.print(piece[pos]);
     	Scanner sc=new Scanner(System.in);
     	int pos=sc.nextInt();
-    	return piece[pos];
+    	return pos;
     	
     }
 

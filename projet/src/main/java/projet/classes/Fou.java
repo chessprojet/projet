@@ -13,8 +13,10 @@ public class Fou extends Piece {
 	public String toString() {
  		return "F";
 	}
-	
-	public void Deplacer(){
+	@Override
+	public void deplacer(Partie pa,Joueur blanc){
+		this.deplacement.clear();
+		this.nbsoldir.clear();
 		int w=CasePlace;
 		/*
 		 * ddroite = possibilité de se déplacer dans la diagonale montante droite
@@ -24,7 +26,7 @@ public class Fou extends Piece {
 		 * 
 		 * */
 		boolean ddroite = true, dgauche = true, mgauche = true, mdroite = true;
-		nbsoldir.add(0); nbsoldir.add(0); nbsoldir.add(0); nbsoldir.add(0);
+		this.nbsoldir.add(0); this.nbsoldir.add(0); this.nbsoldir.add(0); this.nbsoldir.add(0);
 		
 		// Si la pièce est à gauche de l'échiquier
 		if (w%8==0) {
@@ -40,10 +42,10 @@ public class Fou extends Piece {
 		for (int pos=1; pos<8; pos++) {
 			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
 			if (w+9*pos%8==0 && mdroite==false) {
-				mdroite=false; deplacement.add(9*pos); nbsoldir.set(0,nbsoldir.get(0)+1);
+				mdroite=false; this.deplacement.add(9*pos); this.nbsoldir.set(0,this.nbsoldir.get(0)+1);
 			}
 			if (mdroite==true) {
-				deplacement.add(9*pos); nbsoldir.set(0,nbsoldir.get(0)+1);
+				this.deplacement.add(9*pos); this.nbsoldir.set(0,this.nbsoldir.get(0)+1);
 			}
 		}
 		
@@ -51,10 +53,10 @@ public class Fou extends Piece {
 		for (int pos=1; pos<8; pos++) {
 			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
 			if (w+7*pos%8==7 && mgauche==false) {
-				mgauche=false;deplacement.add(7*pos);nbsoldir.set(1,nbsoldir.get(1)+1);
+				mgauche=false;this.deplacement.add(7*pos);this.nbsoldir.set(1,this.nbsoldir.get(1)+1);
 			}
 			if (mgauche==true) {
-				deplacement.add(7*pos); nbsoldir.set(1,nbsoldir.get(1)+1);
+				this.deplacement.add(7*pos); this.nbsoldir.set(1,this.nbsoldir.get(1)+1);
 			}	
 		}
 		
@@ -62,10 +64,10 @@ public class Fou extends Piece {
 		for (int pos=1;pos<8;pos++) {
 			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
 			if (w-7*pos%8==7 && ddroite==true) {
-				ddroite=false;deplacement.add(-7*pos); nbsoldir.set(2,nbsoldir.get(2)+1);
+				ddroite=false;this.deplacement.add(-7*pos); this.nbsoldir.set(2,this.nbsoldir.get(2)+1);
 			}
 			if (ddroite==true) {
-				deplacement.add(-7*pos); nbsoldir.set(2,nbsoldir.get(2)+1);
+				this.deplacement.add(-7*pos); this.nbsoldir.set(2,this.nbsoldir.get(2)+1);
 			}
 		}
 		
@@ -73,10 +75,10 @@ public class Fou extends Piece {
 		for (int pos=1;pos<8;pos++) {
 			// N'ajoute que les déplacements qui ne sortent pas de l'échiquier dans la liste
 			if (w-9*pos%8==0 && dgauche==true) {
-				dgauche=false;deplacement.add(-9*pos); nbsoldir.set(3,nbsoldir.get(3)+1);
+				dgauche=false;this.deplacement.add(-9*pos); this.nbsoldir.set(3,this.nbsoldir.get(3)+1);
 			}
 			if (dgauche==true) {
-				deplacement.add(-9*pos); nbsoldir.set(3,nbsoldir.get(3)+1);
+				this.deplacement.add(-9*pos); this.nbsoldir.set(3,this.nbsoldir.get(3)+1);
 			}
 		}
 	}
