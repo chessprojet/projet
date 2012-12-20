@@ -70,7 +70,7 @@ public class Jeu {
 				pa1.getEchiquierPartie().setCase(pa1.getEchiquierPartie().getPlateau()[i], i);
 				pa1.getJ1().getPiece()[i-56].setCase(i);
 			}
-		//}
+		}
 		
 		/* Variante de jeu : Chess960
 		 * Placement aléatoire de toutes les pièces pour chaque joueur
@@ -191,6 +191,5 @@ public class Jeu {
 		// Affichage de l'échiquier
 
 		pa1.getEchiquierPartie().toString();
-		}
 	}
 }
