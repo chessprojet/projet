@@ -400,42 +400,42 @@ public class Partie {
  		// On regarde le cas des cavaliers
  		
  		if(noir.getPiece()[3].isCase()+direction+6<=63) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].isEtatCase()==true && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getP().isCase()!=noir.getPiece()[6].isCase())) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getP().isCase()!=noir.getPiece()[6].isCase()) {
  				return true;
  			}
  		}
  		if(noir.getPiece()[3].isCase()+direction-6>=0) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].isEtatCase()==true && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getP().isCase()!=noir.getPiece()[6].isCase())) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getP().isCase()!=noir.getPiece()[6].isCase()) {
  				return true;
  			}
  		}
  		if(noir.getPiece()[3].isCase()+direction+10<=63) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].isEtatCase()==true && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getP().isCase()!=noir.getPiece()[6].isCase())) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getP().isCase()!=noir.getPiece()[6].isCase()) {
  				return true;
  			}
  		}
  		if(noir.getPiece()[3].isCase()+direction-10>=0) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].isEtatCase()==true && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getP().isCase()!=noir.getPiece()[6].isCase())) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getP().isCase()!=noir.getPiece()[6].isCase()) {
  				return true;
  			}
  		}
  		if(noir.getPiece()[3].isCase()+direction+15<=63) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].isEtatCase()==true && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getP().isCase()!=noir.getPiece()[6].isCase())) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getP().isCase()!=noir.getPiece()[6].isCase()) {
  				return true;
  			}
  		}
  		if(noir.getPiece()[3].isCase()+direction-15>=0) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].isEtatCase()==true && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getP().isCase()!=noir.getPiece()[6].isCase())) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getP().isCase()!=noir.getPiece()[6].isCase()) {
  				return true;
  			}
  		}
  		if(noir.getPiece()[3].isCase()+direction+17<=63) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].isEtatCase()==true && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getP().isCase()!=noir.getPiece()[6].isCase())) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getP().isCase()!=noir.getPiece()[6].isCase()) {
  				return true;
  			}
  		}
  		if(noir.getPiece()[3].isCase()+direction-17>=0) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].isEtatCase()==true && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().isCase()!=noir.getPiece()[6].isCase())) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().isCase()!=noir.getPiece()[6].isCase()) {
  				return true;
  			}
  		}
