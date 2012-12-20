@@ -81,10 +81,11 @@ public class Partie {
     	{
     		boolean nopresent=true;
     		int pos=0;
+    		if(nbsoldir.get(i)!=0){
     		do{
     			
     			// Si le déplacement sort en-dehors de l'échiquier
-    			if (c.getNumCase()+deplacement.get(pos+somme)<0 || c.getNumCase()+deplacement.get(pos+somme)>64) {
+    			if (c.getNumCase()+deplacement.get(pos+somme)<0 || c.getNumCase()+deplacement.get(pos+somme)>=64) {
     				nopresent=false;
     			}
     			
@@ -113,7 +114,7 @@ public class Partie {
     			pos++;
     			
     		}
-    		while(nbsoldir.get(i)>pos);
+    		while(nbsoldir.get(i)>pos);}
     		somme=somme+nbsoldir.get(i);
     		
     	}
