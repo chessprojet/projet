@@ -21,7 +21,7 @@ public class Jeu {
 		Echiquier e1 = new Echiquier();
 		
 		// Choix du nom des Joueurs et de l'activation de l'aide
-		/*j1.choixNom();
+		j1.choixNom();
 		j1.choixAide();
 		j2.choixNom();
 		j2.choixAide();
@@ -32,7 +32,7 @@ public class Jeu {
 		
 		// Choix de la variante
 		e1.choixVariante();
-		System.out.println("Variante choisie : "+e1.getVariante());	*/
+		System.out.println("Variante choisie : "+e1.getVariante());
 		
 		// Création de la Partie
 		Partie pa1 = new Partie(j1, j2, e1);
@@ -42,7 +42,7 @@ public class Jeu {
 		/* Variante de jeu : Classique
 		 * Placement classique des différentes pièces
 		 */
-		//if (e1.getVariante()=="Classique") {
+		if (e1.getVariante()=="Classique") {
 			
 			// Placement des pièces sur les cases
 			for (int i=0;i<16;i++)
@@ -70,12 +70,12 @@ public class Jeu {
 				pa1.getEchiquierPartie().setCase(pa1.getEchiquierPartie().getPlateau()[i], i);
 				pa1.getJ1().getPiece()[i-56].setCase(i);
 			}
-		//}
+		}
 		
 		/* Variante de jeu : Chess960
 		 * Placement aléatoire de toutes les pièces pour chaque joueur
 		 */
-		/*if (e1.getVariante()=="Chess960") {
+		if (e1.getVariante()=="Chess960") {
 			
 			// Création d'une liste aléatoire pour gérer le placement aléatoire de toutes les pièces
 			ArrayList<Integer> liste = new ArrayList<Integer>();
@@ -110,12 +110,12 @@ public class Jeu {
 				pa1.getEchiquierPartie().setCase(pa1.getEchiquierPartie().getPlateau()[i], i);
 				pa1.getJ1().getPiece()[liste.get(i-56)].setCase(i);
 			}
-		}*/
+		}
 		
 		/* Variante de jeu : D-Chess
 		 * Placement aléatoire de la dernière ligne de pièce pour chaque joueur
 		 */
-		/*if (e1.getVariante()=="D-Chess") {
+		if (e1.getVariante()=="D-Chess") {
 			
 			// Création d'une liste aléatoire pour gérer le placement aléatoire des pièces autres que les pions
 			ArrayList<Integer> liste = new ArrayList<Integer>();
@@ -155,7 +155,7 @@ public class Jeu {
 				pa1.getEchiquierPartie().setCase(pa1.getEchiquierPartie().getPlateau()[i], i);
 				pa1.getJ1().getPiece()[liste.get(i-56)].setCase(i);
 			}
-		}*/
+		}
 		/*final Manche man=new Manche(j2,pa1);
 		
 		int d=30000;//temps a mettre ici
@@ -174,7 +174,7 @@ public class Jeu {
 			ActionListener calcul=new ActionListener(){
 
 				public void actionPerformed(ActionEvent arg0) {
-					// TODO Auto-generated method stub
+					
 				}
 				
 			};
@@ -190,13 +190,6 @@ public class Jeu {
 		
 		// Affichage de l'échiquier
 
-		pa1.getEchiquierPartie().toString();
-		pa1.getJ1().getPiece()[12].deplacer(pa1, j1);
-		int deplacementChoisi = pa1.deplacementPossible(pa1.getJ1().getPiece()[12], j1);
-		pa1.deplacementChoisi(deplacementChoisi, pa1.getJ1().getPiece()[12]);
-		pa1.getJ1().getPiece()[4].deplacer(pa1, j1);
-		int deplacementChoisi2 = pa1.deplacementPossible(pa1.getJ1().getPiece()[4], j1);
-		pa1.deplacementChoisi(deplacementChoisi2, pa1.getJ1().getPiece()[4]);
 		pa1.getEchiquierPartie().toString();
 	}
 }
