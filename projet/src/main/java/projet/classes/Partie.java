@@ -321,64 +321,68 @@ public class Partie {
  		// On regarde le cas des pions
  		if (noir==j1) {
  			// On regarde dans la diagonale montante gauche s'il y a un pion
- 			if (noir.getPiece()[3].isCase()+direction-9>=0){
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9].getP().getClass().getName()=="projet.classes.Pion") {
- 				for (int w=8;w<15;w++) {
- 					// Si on a une pièce allié dans la diagonale à côté, pas d'échec
- 					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9].getNumCase()==noir.getPiece()[w].isCase()) {
- 						estpasechec=true;
+ 			if (noir.getPiece()[3].isCase()+direction-9>=0) {
+ 				if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9].getP().getClass().getName()=="projet.classes.Pion") {
+ 					for (int w=8;w<15;w++) {
+ 						// Si on a une pièce allié dans la diagonale à côté, pas d'échec
+ 						if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9].getNumCase()==noir.getPiece()[w].isCase()) {
+ 							estpasechec=true;
+ 						}
+ 					}
+ 					// Sinon, c'est un pion adverse, donc échec
+ 					if (estpasechec==false) {
+ 						return true;
  					}
  				}
- 				// Sinon, c'est un pion adverse, donc échec
- 				if (estpasechec==false) {
- 					return true;
- 				}}
  			}
  			
  			// On regarde dans la diagonale montante droite s'il y a un pion
- 			if (noir.getPiece()[3].isCase()+direction-7>=0){
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7].getP().getClass().getName()=="projet.classes.Pion") {
- 				for (int w=8;w<15;w++) {
- 					// Si on a une pièce allié dans la diagonale à côté, pas d'échec
- 					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7].getNumCase()==noir.getPiece()[w].isCase()) {
- 						estpasechec=true;
+ 			if (noir.getPiece()[3].isCase()+direction-7>=0) {
+ 				if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7].getP().getClass().getName()=="projet.classes.Pion") {
+ 					for (int w=8;w<15;w++) {
+ 						// Si on a une pièce allié dans la diagonale à côté, pas d'échec
+ 						if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7].getNumCase()==noir.getPiece()[w].isCase()) {
+ 							estpasechec=true;
+ 						}
+ 					}
+ 					// Sinon, c'est un pion adverse, donc échec
+ 					if (estpasechec==false) {
+ 						return true;
  					}
  				}
- 				// Sinon, c'est un pion adverse, donc échec
- 				if (estpasechec==false) {
- 					return true;
- 				}
- 			}}
+ 			}
  		}
  		
  		else {
  			// On regarde dans la diagonale descendante droite s'il y a un pion
- 			if (noir.getPiece()[3].isCase()+direction+9<=63){
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9].getP().getClass().getName()=="projet.classes.Pion") {
- 				for (int w=8;w<15;w++) {
- 					// Si on a une pièce allié dans la diagonale à côté, pas d'échec
- 					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9].getNumCase()==noir.getPiece()[w].isCase()) {
- 						estpasechec=true;
+ 			if (noir.getPiece()[3].isCase()+direction+9<=63) {
+ 				if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9].getP().getClass().getName()=="projet.classes.Pion") {
+ 					for (int w=8;w<15;w++) {
+ 						// Si on a une pièce allié dans la diagonale à côté, pas d'échec
+ 						if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9].getNumCase()==noir.getPiece()[w].isCase()) {
+ 							estpasechec=true;
+ 						}
+ 					}
+ 					// Sinon, c'est un pion adverse, donc échec
+ 					if (estpasechec==false) {
+ 						return true;
  					}
  				}
- 				// Sinon, c'est un pion adverse, donc échec
- 				if (estpasechec==false) {
- 					return true;
- 				}
- 			}}
+ 			}
  						
  			// On regarde dans la diagonale descendante gauche s'il y a un pion
- 			if (noir.getPiece()[3].isCase()+direction+7<=63){
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7].getP().getClass().getName()=="projet.classes.Pion") {
- 				for (int w=8;w<15;w++) {
- 					// Si on a une pièce allié dans la diagonale à côté, pas d'échec
- 					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7].getNumCase()==noir.getPiece()[w].isCase()) {
- 						estpasechec=true;
- 					}}
- 				}
- 				// Sinon, c'est un pion adverse, donc échec
- 				if (estpasechec==false) {
- 					return true;
+ 			if (noir.getPiece()[3].isCase()+direction+7<=63) {
+ 				if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7].getP().getClass().getName()=="projet.classes.Pion") {
+ 					for (int w=8;w<15;w++) {
+ 						// Si on a une pièce allié dans la diagonale à côté, pas d'échec
+ 						if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7].getNumCase()==noir.getPiece()[w].isCase()) {
+ 							estpasechec=true;
+ 						}
+ 					}
+ 					// Sinon, c'est un pion adverse, donc échec
+ 					if (estpasechec==false) {
+ 						return true;
+ 					}
  				}
  			}
  		}
