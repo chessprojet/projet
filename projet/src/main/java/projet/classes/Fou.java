@@ -17,7 +17,7 @@ public class Fou extends Piece {
 	public void deplacer(Partie pa,Joueur blanc){
 		this.deplacement.clear();
 		this.nbsoldir.clear();
-		int w=CasePlace;
+		int w=this.CasePlace;
 		/*
 		 * ddroite = possibilité de se déplacer dans la diagonale montante droite
 		 * mdroite = possibilité de se déplacer dans la diagonale descendante droite

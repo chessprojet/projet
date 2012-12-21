@@ -11,8 +11,8 @@ public class Case {
 	
 	// Constructeur de la Case
 	public Case(int numero) {
-			NumCase=numero;
-			EtatCase=false;
+			this.NumCase=numero;
+			this.EtatCase=false;
 	}
 	
 	// Getter de la Pièce associée à la Case
@@ -28,22 +28,23 @@ public class Case {
 	
 	// Getter du numéro de la Case
 	public int getNumCase() {
-		return NumCase;
+		return this.NumCase;
 	}
 
 	// Setter du numéro de la Case
 	public void setNumCase(int numCase) {
-		NumCase = numCase;
+		this.NumCase = numCase;
 	}
 	
 	// Getter de l'état de la Case
 	public boolean isEtatCase() {
-		return EtatCase;
+		return this.EtatCase;
 	}
 
 	// Setter de l'état de la Case
 	public void setEtatCase(boolean etatCase) {
-		EtatCase = etatCase;
+		this.EtatCase = etatCase;
+		if (etatCase==false){this.p=null;};
 	}
 	
 	// Méthode pour l'affichage de la pièce sur la case ou de son innocupation

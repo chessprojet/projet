@@ -1,18 +1,26 @@
 package projet.classes;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
 // Classe Manche
 
 public class Manche {
-
+	
     private int numTour;			// Numéro du tour
     private Joueur j;				// Joueur à qui est associé le tour
     private Partie part;			// Partie à laquelle est associé le tour
-    
+	
+
+
     // Constructeur de la Manche
     public Manche(Joueur jo,Partie partie) {
     	this.numTour=1;
     	this.j=jo;
     	this.part=partie;
+   
     }
     
     // Getter de la Partie associée
@@ -50,18 +58,42 @@ public class Manche {
     	this.numTour=this.numTour+1;
     }
     
-    public void jouerManche(){
+    public void jouerManche(boolean finDeManche){
     	int pos=0;
     	int DC=0;
+    	int d=0;//definir d le temps de tour : action listener
+    	serializerManche sm=new serializerManche(part);
     	do{
-    	pos=j.choixPieceADeplacer();
-    	this.j.getPiece()[pos].deplacer(this.part,this.j);
-    	DC=this.part.deplacementPossible(this.j.getPiece()[pos],this.j);}
+    	do{
+    		pos=j.choixPieceADeplacer();
+    		this.j.getPiece()[pos].deplacer(this.part,this.j);
+    		DC=part.ChoixDuDeplacement(this.part.deplacementPossible(this.j.getPiece()[pos],this.j),this.j.getPiece()[pos]);}
     	while(DC==0 || j.getPiece()[pos].isEtat()!=true);
+    	Case c=part.getEchiquierPartie().getPlateau()[DC];
     	this.part.deplacementChoisi(DC,this.j.getPiece()[pos]);
     	this.j.getPiece()[pos].setCase(DC);
+    	if (this.part.estEnEchec(this.j,0)!=false)
+    	{
+    		part.getEchiquierPartie().getPlateau()[DC]=c;
+    	}
+    	}
+    	while(this.part.estEnEchec(this.j,0)!=false);// on verife quel'on fini pas en echec et mat a la fin du tour
     	this.part.getEchiquierPartie().toString();
+    	sm.serializ(DC);
+    	
    
     }
+
+	public void finDeManche() {
+		// TODO Auto-generated method stub
+		
+		this.incrementerTour();
+		
+		if (j==part.getJ1())
+			this.setJ(part.getJ2());
+		else
+			this.setJ(part.getJ1());
+		
+	}
 
  }

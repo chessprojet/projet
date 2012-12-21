@@ -4,11 +4,65 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Scanner;
 import java.util.Timer;
 
 // Classe Jeu permettant le lancement du jeu
 
 public class Jeu {
+	private Partie pa1;
+	public Jeu(Partie p){
+		this.pa1=p;
+	}
+	public boolean estEnPat(Joueur noir) {
+ 		if (this.pa1.estEnEchec(noir, -9)==true && this.pa1.estEnEchec(noir, -8)==true && this.pa1.estEnEchec(noir, -7)==true && this.pa1.estEnEchec(noir, -1)==true && this.pa1.estEnEchec(noir, 1)==true && this.pa1.estEnEchec(noir, 7)==true && this.pa1.estEnEchec(noir, 8)==true && this.pa1.estEnEchec(noir, 9)==true) {
+ 			for (int k=0;k<15;k++){
+ 				noir.getPiece()[k].deplacer(pa1, noir);
+ 				if (k!=3 && pa1.deplacementPossible(noir.getPiece()[k], noir)!=null){return false;}
+ 			}
+ 			return true;
+ 		}
+ 		else {
+ 			return false;
+ 		}
+ 	}
+ 	
+ 	public boolean estEchecMat(Joueur noir) {
+ 		
+ 		if (this.pa1.estEnEchec(noir, 0)==true && this.pa1.estEnEchec(noir, -9)==true && this.pa1.estEnEchec(noir, -8)==true && this.pa1.estEnEchec(noir, -7)==true && this.pa1.estEnEchec(noir, -1)==true && this.pa1.estEnEchec(noir, 1)==true && this.pa1.estEnEchec(noir, 7)==true && this.pa1.estEnEchec(noir, 8)==true && this.pa1.estEnEchec(noir, 9)==true) {
+ 			
+ 			for (int k=0;k<15;k++){
+ 				noir.getPiece()[k].deplacer(pa1, noir);
+ 				if (k!=3){
+ 					ArrayList<Integer> dp=pa1.deplacementPossible(noir.getPiece()[k], noir);
+ 					for (int pos=0;pos<dp.size();pos++){
+ 						if (this.pa1.getEchiquierPartie().getPlateau()[dp.get(pos)].isEtatCase()==false){
+ 							this.pa1.getEchiquierPartie().getPlateau()[dp.get(pos)].setP(new Pion());
+ 							if(this.pa1.estEnEchec(noir, 0)==false){
+ 								this.pa1.getEchiquierPartie().getPlateau()[dp.get(pos)].setEtatCase(false);
+ 								return false;
+ 							}
+ 							this.pa1.getEchiquierPartie().getPlateau()[dp.get(pos)].setEtatCase(false);
+ 						}
+ 						else {
+ 							Piece p=this.pa1.getEchiquierPartie().getPlateau()[dp.get(pos)].getP();
+ 							this.pa1.getEchiquierPartie().getPlateau()[dp.get(pos)].setEtatCase(false);
+ 							this.pa1.getEchiquierPartie().getPlateau()[dp.get(pos)].setP(null);
+ 							if (this.pa1.estEnEchec(noir, 0)==false){
+ 								this.pa1.getEchiquierPartie().getPlateau()[dp.get(pos)].setP(p);
+ 								return false;
+ 							}
+ 							this.pa1.getEchiquierPartie().getPlateau()[dp.get(pos)].setP(p);
+ 						}
+ 					}
+ 				}
+ 			}
+ 			return true;
+ 		}
+ 		else {
+ 			return false;
+ 		}
+ 	}
 	
 	public static void main(String[] args) {
 		
@@ -35,8 +89,9 @@ public class Jeu {
 		System.out.println("Variante choisie : "+e1.getVariante());
 		
 		// Création de la Partie
-		Partie pa1 = new Partie(j1, j2, e1);
 		
+		Partie pa1 = new Partie(j1, j2, e1);
+		Jeu game=new Jeu(pa1);
 		// Mise en place de l'échiquier
 		
 		/* Variante de jeu : Classique
@@ -156,40 +211,59 @@ public class Jeu {
 				pa1.getJ1().getPiece()[liste.get(i-56)].setCase(i);
 			}
 		}
-		/*final Manche man=new Manche(j2,pa1);
-		
+		Manche man=new Manche(pa1.getJ1(),pa1);
+
 		int d=30000;//temps a mettre ici
 		
 		boolean finDePartie=false;
+		boolean finDeManche = false;
 		while(finDePartie==false){
-			if(man.getJ()==j1){
-				man.setJ(j2);
-			}
-			else{
-				man.setJ(j1);
-			}
-			final Manche manprim=man;
-			final Joueur j1prim=j1;
-			final Joueur j2prim=j2;
-			ActionListener calcul=new ActionListener(){
+			/*ActionListener calcul=new ActionListener(){
 
 				public void actionPerformed(ActionEvent arg0) {
-					
+					man.finDeManche();
+
 				}
 				
 			};
-			javax.swing.Timer t = new javax.swing.Timer(d, calcul);
-			t.restart();
-			man.jouerManche();
-			t.stop();
-			boolean finDePartie2=man.finDeManche();
-			if (finDePartie2==true){finDePartie=true;}
+			javax.swing.Timer t = new javax.swing.Timer(d, calcul);*/
+			//t.restart();
+			man.jouerManche(finDeManche);
+			//t.stop();
 			man.finDeManche();
-		}*/		
-
-		
-		// Affichage de l'échiquier
-
-		pa1.getEchiquierPartie().toString();
+			
+			finDePartie=game.estEchecMat(man.getJ());
+			/*System.out.println(pa1.estEnEchec(man.getJ(), -9)+"hj");
+			System.out.println("po"+ pa1.estEnEchec(man.getJ(), -8));*/
+			//System.out.println("ki"+pa1.estEnEchec(man.getJ(), -7));
+			/*System.out.println("lpopoo"+pa1.estEnEchec(man.getJ(), -1));
+			System.out.println("fddfdfdfd"+pa1.estEnEchec(man.getJ(), 1));
+			System.out.println("ppoopopooppo"+pa1.estEnEchec(man.getJ(), 7));
+			System.out.println("lpllplplplpl-"+pa1.estEnEchec(man.getJ(), 8));*/
+			//System.out.println("tye"+pa1.estEnEchec(man.getJ(), 9));
+			if (finDePartie==false){
+				finDePartie=game.estEnPat(man.getJ());
+			}
+			if (finDePartie==false){
+				finDeManche=pa1.estEnEchec(man.getJ(),0);
+			}
+			
+			
+			
+				
+				
+			}
+		//mettre un affichage 
+		System.out.println("Voulez-vous revoir la partie ?1.0 2.N");
+		Scanner sc=new Scanner(System.in);
+		int rep=sc.nextInt();
+		if (rep==1){// Affichage de l'échiquier
+			String partieJouee="";
+			deserializerManche dm=new deserializerManche(pa1);
+			for (int g=0;g<man.getNumTour();g--){
+				partieJouee=partieJouee+"\n"+dm.deserializ(man);
+			System.out.println(dm);
+			}
+		}
 	}
 }

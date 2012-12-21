@@ -69,7 +69,7 @@ public class Partie {
     }*/
 	
     // Méthode pour déplacer une pièce
-    public int deplacementPossible(Piece p,Joueur blanc){	
+    public ArrayList<Integer> deplacementPossible(Piece p,Joueur blanc){	
     	// On regarde tous les déplacements possibles (concerne toutes les pièces)
     	ArrayList<Integer> deplacementPossible = new ArrayList<Integer>();
     	ArrayList<Integer> nbsoldir=p.getNbsoldir();
@@ -82,8 +82,7 @@ public class Partie {
     		int pos=0;
     		if(nbsoldir.get(i)!=0){
     		do{
-    			
-    			// Si le déplacement sort en-dehors de l'échiquier
+    			    			// Si le déplacement sort en-dehors de l'échiquier
     			if (c.getNumCase()+deplacement.get(pos+somme)<0 || c.getNumCase()+deplacement.get(pos+somme)>=64) {
     				nopresent=false;
     			}
@@ -92,7 +91,8 @@ public class Partie {
     				if (echiquierPartie.getPlateau()[c.getNumCase()+deplacement.get(pos+somme)].isEtatCase()==true) {
     					for (int pos2=0;pos2<16;pos2++) {
     						// Si le déplacement est sur une pièce nous appartient
-    						if (echiquierPartie.getPlateau()[c.getNumCase()+deplacement.get(pos+somme)].getNumCase()==echiquierPartie.getPlateau()[blanc.getPiece()[pos2].isCase()].getNumCase()) {
+    						if (echiquierPartie.getPlateau()[c.getNumCase()+deplacement.get(pos+somme)].getNumCase()==blanc.getPiece()[pos2].isCase()) {
+    							System.out.println(blanc.getPiece()[pos2].isCase());
     							nopresent=false;
     						}
     					}
@@ -117,11 +117,15 @@ public class Partie {
     		somme=somme+nbsoldir.get(i);
     		
     	}
+    	return deplacementPossible;
+    }
     	// On affiche les différents déplacements possibles
     	//rmeplacer ca par les case en surbrillance et les listener de deplacements
+    	
+    public int ChoixDuDeplacement(ArrayList<Integer> deplacementPossible,Piece p){
     	for (int pos1=0;pos1<deplacementPossible.size();pos1++){
     		System.out.println("Choix "+pos1+" : ");
-    		System.out.println(c.getNumCase()+deplacementPossible.get(pos1));
+    		System.out.println(p.isCase()+deplacementPossible.get(pos1));
     	}
     	if (deplacementPossible.size()==0){return 0;}
     	Scanner sc=new Scanner(System.in);//mettre un listener ici pour le deplacement
@@ -155,6 +159,9 @@ public class Partie {
 
     // Méthode pour connaître si le roi est en échec
  	public boolean estEnEchec(Joueur noir, int direction) {
+ 		if ((noir.getPiece()[3].isCase()<8 && direction== -8) || (noir.getPiece()[3].isCase()>55 && direction == 8)){return false;}
+ 		if (noir.getPiece()[3].isCase()%8==0 && (direction==-9 || direction == 7 || direction == -1)){return false;}
+ 		if (noir.getPiece()[3].isCase()%8==7 && (direction==9 || direction == -7 || direction == 1)){return false;}
  		boolean estpasechec=false;
  		int pos=1;
  		
@@ -168,13 +175,16 @@ public class Partie {
  					}
  				}
  				// Si on a une reine ou une tour adverse en face, échec
+ 				//System.out.println(echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+pos*8].getP().getClass().getName());
  				if (estpasechec==false && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+pos*8].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+pos*8].getP().getClass().getName()=="projet.classes.Tour" )) {
+ 					
  					return true;
  				}
+ 				estpasechec=true;
  			}
  			pos++;
  		}
- 		
+ 		//System.out.println(estpasechec);
  		pos=1;
  		estpasechec=false;
  		
@@ -191,15 +201,16 @@ public class Partie {
  				if (estpasechec==false && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos*8].getP().getClass().getName()=="projet.classes.Tour" )) {
  					return true;
  				}
+ 				estpasechec=true;
  			}
  			pos++;
  		}
-
+ 		//System.out.println(estpasechec);
  		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur le côté droit
- 		while((pos+noir.getPiece()[3].isCase()+direction)%8!=0 && estpasechec==false) {
+ 		while((pos+noir.getPiece()[3].isCase()+direction)%8!=0 && estpasechec==false && noir.getPiece()[3].isCase()+direction>=0 && noir.getPiece()[3].isCase()+direction<64) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++){
  					// Si on a une pièce allié à droite, pas d'échec
@@ -211,15 +222,16 @@ public class Partie {
  				if (estpasechec==false && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+pos].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+pos].getP().getClass().getName()=="projet.classes.Tour" )) {
  					return true;
  				}
+ 				estpasechec=true;
  			}
  			pos++;
  		}
- 		
+ 		//System.out.println(estpasechec);
  		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur le côté gauche
- 		while((-pos+noir.getPiece()[3].isCase()+direction)%8!=7 && estpasechec==false && -pos+noir.getPiece()[3].isCase()+direction!=-1) {
+ 		while((-pos+noir.getPiece()[3].isCase()+direction)%8!=7 && estpasechec==false  && -pos+noir.getPiece()[3].isCase()+direction>=0 && -pos+noir.getPiece()[3].isCase()+direction<64) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++) {
  					// Si on a une pièce allié à gauche, pas d'échec
@@ -231,15 +243,16 @@ public class Partie {
  				if (estpasechec==false && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-pos].getP().getClass().getName()=="projet.classes.Tour" )) {
  					return true;
  				}
+ 				estpasechec=true;
  			}
  			pos++;
  		}
- 		
+ 		//System.out.println(estpasechec);
  		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur la diagonale descendante droite
- 		while((9*pos+noir.getPiece()[3].isCase()+direction<=63 && (9*pos+noir.getPiece()[3].isCase()+direction)%8!=0) && estpasechec==false) {
+ 		while(9*pos+noir.getPiece()[3].isCase()+direction<=63 && (9*pos+noir.getPiece()[3].isCase()+direction)%8!=0 && estpasechec==false) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9*pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++) {
  					// Si on a une pièce allié dans la diagonale, pas d'échec
@@ -251,10 +264,11 @@ public class Partie {
  				if (estpasechec==false && ( echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9*pos].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9*pos].getP().getClass().getName()=="projet.classes.Fou" )) {
  					return true;
  				}
+ 				estpasechec=true;
  			}
  			pos++;
  		}
- 		
+ 		//System.out.println(estpasechec);
  		pos=1;
  		estpasechec=false;
  		
@@ -266,20 +280,22 @@ public class Partie {
  					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7*pos].getNumCase()==noir.getPiece()[k].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+pos*7].getP().getClass().getName()!="projet.classes.Roi") {
  						estpasechec=true;
  					}
+ 					
  				}
  				// Si on a une reine ou un fou adverse dans la diagonale, échec la il y as une erreur d'apres le debueguer
  				if (estpasechec==false && ( echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7*pos].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7*pos].getP().getClass().getName()=="projet.classes.Fou" )) {
  					return true;
  				}
+ 				estpasechec=true;
  			}
  			pos++;
  		}
- 		
+ 		//System.out.println(estpasechec);
  		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur la diagonale montante gauche
- 		while((-7*pos+noir.getPiece()[3].isCase()+direction>=0 && (-7*pos+noir.getPiece()[3].isCase()+direction)%8!=0) && estpasechec==false) {
+ 		while((-7*pos+noir.getPiece()[3].isCase()+direction>=0 && (-7*pos+noir.getPiece()[3].isCase()+direction)%8!=7) && estpasechec==false && (-7*pos+noir.getPiece()[3].isCase()+direction)%8!=-1) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7*pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++) {
  					// Si on a une pièce allié dans la diagonale, pas d'échec
@@ -288,18 +304,19 @@ public class Partie {
  					}
  				}
  				// Si on a une reine ou un fou adverse dans la diagonale, échec
- 				if (estpasechec==false && ( echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7*pos].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7*pos].getP().getClass().getName()=="projet.classes.Fou" )) {
+ 				if (estpasechec==false && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7*pos].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7*pos].getP().getClass().getName()=="projet.classes.Fou" )) {
  					return true;
  				}
+ 				estpasechec=true;
  			}
  			pos++;
  		}
- 		
+ 		//System.out.println(estpasechec);
  		pos=1;
  		estpasechec=false;
  		
  		// On regarde sur la diagonale montante droite
- 		while((-9*pos+noir.getPiece()[3].isCase()+direction>=0 && (-9*pos+noir.getPiece()[3].isCase()+direction)%8!=7) && estpasechec==false) {
+ 		while((-9*pos+noir.getPiece()[3].isCase()+direction>=0 && (-9*pos+noir.getPiece()[3].isCase()+direction)%8!=0) && estpasechec==false) {
  			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9*pos].isEtatCase()==true) {
  				for (int k=0;k<16;k++) {
  					// Si on a une pièce allié dans la diagonale, pas d'échec
@@ -311,22 +328,23 @@ public class Partie {
  				if (estpasechec==false && ( echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9*pos].getP().getClass().getName()=="projet.classes.Reine"  ||  echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9*pos].getP().getClass().getName()=="projet.classes.Fou" )) {
  					return true;
  				}
+ 				estpasechec=true;
  			}
  			pos++;
  		}
- 		
+ 		//System.out.println(estpasechec);
  		pos=1;
  		estpasechec=false;
  		
  		// On regarde le cas des pions
  		if (noir==j1) {
  			// On regarde dans la diagonale montante gauche s'il y a un pion
- 			if (noir.getPiece()[3].isCase()+direction-9>=0) {
+ 			if (noir.getPiece()[3].isCase()+direction-9>=0  && (noir.getPiece()[3].isCase()+direction-9)%8!=7) {
  				if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9].isEtatCase()==true) {
  					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9].getP().getClass().getName()=="projet.classes.Pion") {
  						for (int w=8;w<15;w++) {
  							// Si on a une pièce allié dans la diagonale à côté, pas d'échec
- 							if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9].getNumCase()==noir.getPiece()[w].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9].getP().getClass().getName()!="projet.classes.Roi") {
+ 							if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-9].getNumCase()==noir.getPiece()[w].isCase()) {
  								estpasechec=true;
  							}
  						}
@@ -339,12 +357,12 @@ public class Partie {
  			}
  			
  			// On regarde dans la diagonale montante droite s'il y a un pion
- 			if (noir.getPiece()[3].isCase()+direction-7>=0) {
+ 			if (noir.getPiece()[3].isCase()+direction-7>=0  && (noir.getPiece()[3].isCase()+direction-7)%8!=0) {
  				if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7].isEtatCase()==true) {
  					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7].getP().getClass().getName()=="projet.classes.Pion") {
  						for (int w=8;w<15;w++) {
  							// Si on a une pièce allié dans la diagonale à côté, pas d'échec
- 							if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7].getNumCase()==noir.getPiece()[w].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7].getP().getClass().getName()!="projet.classes.Roi") {
+ 							if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-7].getNumCase()==noir.getPiece()[w].isCase() ) {
  								estpasechec=true;
  							}
  						}
@@ -359,12 +377,12 @@ public class Partie {
  		
  		else {
  			// On regarde dans la diagonale descendante droite s'il y a un pion
- 			if (noir.getPiece()[3].isCase()+direction+9<=63) {
+ 			if (noir.getPiece()[3].isCase()+direction+9<=63 && (noir.getPiece()[3].isCase()+direction+9)%8!=0) {
  				if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9].isEtatCase()==true) {
  					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9].getP().getClass().getName()=="projet.classes.Pion") {
  						for (int w=8;w<15;w++) {
  							// Si on a une pièce allié dans la diagonale à côté, pas d'échec
- 							if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9].getNumCase()==noir.getPiece()[w].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9].getP().getClass().getName()!="projet.classes.Roi") {
+ 							if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+9].getNumCase()==noir.getPiece()[w].isCase()) {
  								estpasechec=true;
  							}
  						}
@@ -376,12 +394,12 @@ public class Partie {
  				}
  			}			
  			// On regarde dans la diagonale descendante gauche s'il y a un pion
- 			if (noir.getPiece()[3].isCase()+direction+9<=63) {
+ 			if (noir.getPiece()[3].isCase()+direction+7<=63 && (noir.getPiece()[3].isCase()+direction+7)%8!=7) {
  				if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7].isEtatCase()==true) {
  					if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7].getP().getClass().getName()=="projet.classes.Pion") {
  						for (int w=8;w<15;w++) {
  							// Si on a une pièce allié dans la diagonale à côté, pas d'échec
- 							if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7].getNumCase()==noir.getPiece()[w].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7].getP().getClass().getName()!="projet.classes.Roi") {
+ 							if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+7].getNumCase()==noir.getPiece()[w].isCase()) {
  								estpasechec=true;
  							}
  						}
@@ -393,72 +411,64 @@ public class Partie {
  				}
  			}
  		}
- 		
+ 		//System.out.println(estpasechec);
  		pos=1;
  		estpasechec=false;
  		
  		// On regarde le cas des cavaliers
  		
- 		if(noir.getPiece()[3].isCase()+direction+6<=63) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getP().isCase()!=noir.getPiece()[6].isCase()) {
+ 		if(noir.getPiece()[3].isCase()+direction+6<=63 && (noir.getPiece()[3].isCase()+direction-2)%8!=7) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getP().getClass().getName()=="projet.classes.Cavalier" && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getNumCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+6].getNumCase()!=noir.getPiece()[6].isCase())) {
+ 				//System.out.println("cav1");
  				return true;
  			}
  		}
- 		if(noir.getPiece()[3].isCase()+direction-6>=0) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getP().isCase()!=noir.getPiece()[6].isCase()) {
+ 		if(noir.getPiece()[3].isCase()+direction-6>=0 && (noir.getPiece()[3].isCase()+direction+2)%8!=0) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getP().getClass().getName()=="projet.classes.Cavalier" && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getNumCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-6].getNumCase()!=noir.getPiece()[6].isCase())) {
+ 				//System.out.println("cav2");
  				return true;
  			}
  		}
- 		if(noir.getPiece()[3].isCase()+direction+10<=63) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getP().isCase()!=noir.getPiece()[6].isCase()) {
+ 		if(noir.getPiece()[3].isCase()+direction+10<=63 && (noir.getPiece()[3].isCase()+direction+2)%8!=0) {
+ 			//System.out.println(echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getP().getClass().getName());
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].isEtatCase()==true && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getP().getClass().getName()=="projet.classes.Cavalier") && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getNumCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+10].getNumCase()!=noir.getPiece()[6].isCase())) {
+ 				//System.out.println("cav3");
  				return true;
  			}
  		}
- 		if(noir.getPiece()[3].isCase()+direction-10>=0) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getP().isCase()!=noir.getPiece()[6].isCase()) {
+ 		if(noir.getPiece()[3].isCase()+direction-10>=0 && (noir.getPiece()[3].isCase()+direction-2)%8!=7) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getP().getClass().getName()=="projet.classes.Cavalier" && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getNumCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-10].getP().isCase()!=noir.getPiece()[6].isCase())) {
+ 				//System.out.println("cav4");
  				return true;
  			}
  		}
- 		if(noir.getPiece()[3].isCase()+direction+15<=63) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getP().isCase()!=noir.getPiece()[6].isCase()) {
+ 		if(noir.getPiece()[3].isCase()+direction+15<=63 && (noir.getPiece()[3].isCase()+direction-1)%8!=7) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getP().getClass().getName()=="projet.classes.Cavalier" && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getNumCase()!=noir.getPiece()[1].isCase() &&echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+15].getNumCase()!=noir.getPiece()[6].isCase())) {
+ 				//System.out.println("cav5");
  				return true;
  			}
  		}
- 		if(noir.getPiece()[3].isCase()+direction-15>=0) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getP().isCase()!=noir.getPiece()[6].isCase()) {
+ 		if(noir.getPiece()[3].isCase()+direction-15>=0 && (noir.getPiece()[3].isCase()+direction+1)%8!=0) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getP().getClass().getName()=="projet.classes.Cavalier" && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getNumCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-15].getNumCase()!=noir.getPiece()[6].isCase())) {
+ 				//System.out.println("cav6");
  				return true;
  			}
  		}
- 		if(noir.getPiece()[3].isCase()+direction+17<=63) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getP().isCase()!=noir.getPiece()[6].isCase()) {
+ 		if(noir.getPiece()[3].isCase()+direction+17<=63 && (noir.getPiece()[3].isCase()+direction+1)%8!=0) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getP().getClass().getName()=="projet.classes.Cavalier" && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getNumCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction+17].getNumCase()!=noir.getPiece()[6].isCase())) {
+ 				//System.out.println("cav7");
  				return true;
  			}
  		}
- 		if(noir.getPiece()[3].isCase()+direction-17>=0) {
- 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().getClass().getName()=="projet.classes.Cavalier" && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().isCase()!=noir.getPiece()[1].isCase() && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().isCase()!=noir.getPiece()[6].isCase()) {
+ 		if(noir.getPiece()[3].isCase()+direction-17>=0 && (noir.getPiece()[3].isCase()+direction-1)%8!=7) {
+ 			if (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].isEtatCase()==true && echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getP().getClass().getName()=="projet.classes.Cavalier" && (echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getNumCase()!=noir.getPiece()[1].isCase() || echiquierPartie.getPlateau()[noir.getPiece()[3].isCase()+direction-17].getNumCase()!=noir.getPiece()[6].isCase())) {
+ 				//System.out.println("cav8");
  				return true;
  			}
  		}
  		return false;
  	}
  	
- 	public boolean estEnPat(Joueur noir) {
- 		if (estEnEchec(noir, -9)==true && estEnEchec(noir, -8)==true && estEnEchec(noir, -7)==true && estEnEchec(noir, -1)==true && estEnEchec(noir, 1)==true && estEnEchec(noir, 7)==true && estEnEchec(noir, 8)==true && estEnEchec(noir, 9)==true) {
- 			return true;
- 		}
- 		else {
- 			return false;
- 		}
- 	}
- 	
- 	public boolean estEchecMat(Joueur noir) {
- 		if (estEnEchec(noir, 0)==true && estEnPat(noir)==true) {
- 			return true;
- 		}
- 		else {
- 			return false;
- 		}
- 	}
  	
 }
   

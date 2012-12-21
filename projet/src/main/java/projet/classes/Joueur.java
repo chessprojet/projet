@@ -65,7 +65,7 @@ public class Joueur {
     
     // Choix de l'activation de l'aide
     public void choixAide() {
-    	System.out.println("Activation de l'aide ?");
+    	System.out.println("Activation de l'aide ? (seulement pour l'interface grahique)");
 		Scanner sc = new Scanner(System.in);
 		int a=sc.nextInt();
 		if (a==1)
@@ -75,11 +75,15 @@ public class Joueur {
     }
 
     public int choixPieceADeplacer(){
-    	System.out.println("piece a deplacer?");
-    	for (int pos=0;pos<16;pos++)
-    		System.out.print(piece[pos]);
+    	System.out.println("tour de "+this.nom);
+    	System.out.println("piece a deplacer? selectionner un nombre");
+    	int pos;
+		do{
+    	for (pos=0;pos<16;pos++)
+    		if(piece[pos].isEtat()==true){System.out.println(pos+"."+piece[pos]);}
     	Scanner sc=new Scanner(System.in);
-    	int pos=sc.nextInt();
+    	pos=sc.nextInt();}
+    	while(piece[pos].isEtat()!=true);
     	return pos;
     	
     }

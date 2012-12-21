@@ -22,30 +22,30 @@ public class Pion extends Piece {
 		this.deplacement.clear();
 		this.nbsoldir.clear();
 		if (blanc==pa.getJ1()) {
-			if (pa.getEchiquierPartie().getPlateau()[CasePlace-8].isEtatCase()==false) {
+			if (pa.getEchiquierPartie().getPlateau()[this.CasePlace-8].isEtatCase()==false) {
 				this.deplacement.add(-8);
 				this.nbsoldir.add(1);
 			}
-			if (pa.getEchiquierPartie().getPlateau()[CasePlace-7].isEtatCase()==true) {
+			if (pa.getEchiquierPartie().getPlateau()[this.CasePlace-7].isEtatCase()==true && this.CasePlace%8!=7) {
 				this.deplacement.add(-7);
 				this.nbsoldir.add(1);
 			}
-			if (pa.getEchiquierPartie().getPlateau()[CasePlace-9].isEtatCase()==true) {
+			if (pa.getEchiquierPartie().getPlateau()[this.CasePlace-9].isEtatCase()==true && CasePlace%8!=0) {
 				this.deplacement.add(-9);
 				this.nbsoldir.add(1);
 			}	
 		}
 		
 		else {
-			if (pa.getEchiquierPartie().getPlateau()[CasePlace+8].isEtatCase()==false) {
+			if (pa.getEchiquierPartie().getPlateau()[this.CasePlace+8].isEtatCase()==false) {
 				this.deplacement.add(8);
 				this.nbsoldir.add(1);
 			}
-			if (pa.getEchiquierPartie().getPlateau()[CasePlace+7].isEtatCase()==true) {
+			if (pa.getEchiquierPartie().getPlateau()[this.CasePlace+7].isEtatCase()==true && CasePlace%8!=0) {
 				this.deplacement.add(7);
 				this.nbsoldir.add(1);
 			}
-			if (pa.getEchiquierPartie().getPlateau()[CasePlace+9].isEtatCase()==true) {
+			if (pa.getEchiquierPartie().getPlateau()[this.CasePlace+9].isEtatCase()==true && CasePlace%8!=7) {
 				this.deplacement.add(9);
 				this.nbsoldir.add(1);
 			}
